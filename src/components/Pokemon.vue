@@ -1,15 +1,20 @@
 <template>
-    <div class="border rounded-xl p-3">
-        <img :src="pokemonSprite(getPokemonId(pokemon.url))"  :alt="pokemon.name"/>
-        {{ pokemon.name }}
+    <div class="flex flex-col items-center border rounded-xl">
+        <div class="bg-[#F2F2F2] w-full rounded-t-xl">
+            <img class="w-1/2 m-auto" :src="pokemonSprite(getPokemonIdByUrl(pokemon.url))"  :alt="pokemon.name"/>
+        </div>
+        <div class="flex flex-col items-center py-3">
+            <div class="font-bold">{{ getPokemonIdByUrl(pokemon.url) }}</div>
+            <div>{{ pokemonName }}</div>
+        </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, type PropType, ref } from "vue";
+import { computed, defineComponent, type PropType, ref } from "vue";
 import type { Pokemon } from "@/types";
 import pokemonSprite from "@/composables/pokemonSprite"
-import getPokemonId from "@/composables/getPokemonId"
+import getPokemonIdByUrl from "@/composables/getPokemonId"
 
 export default defineComponent({
     name: 'Pokemon',
@@ -22,10 +27,13 @@ export default defineComponent({
     setup(props) {
         const { pokemon } = props;
 
+        const pokemonName = computed(() => pokemon.name[0].toUpperCase() + pokemon.name.substring(1, pokemon.name.length));
+
         return {
             pokemon,
+            pokemonName,
             pokemonSprite,
-            getPokemonId
+            getPokemonIdByUrl
         }
     }
 });
