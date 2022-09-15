@@ -5,8 +5,8 @@ class Pokemon {
 
     async getPokemons(): Promise<PokemonType[]> {
         try {
-            const res = await http.get('pokemon?limit=100000&offset=0')
-            return res.data
+            const res = await http.get('pokemon?limit=905&offset=0')
+            return res.data.results;
         } catch (e: any) {
             return e;
         }
