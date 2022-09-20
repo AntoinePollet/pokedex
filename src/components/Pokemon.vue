@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, type PropType, ref } from "vue";
+import { computed, defineComponent, type PropType } from "vue";
 import type { PokemonBaseResult } from "@/types";
 import { pokemonSprite, pokemonIdByUrl } from "@/composables/pokemonUtilities"
 
