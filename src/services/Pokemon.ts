@@ -1,9 +1,9 @@
 import { http } from "@/http/http";
-import type { Pokemon as PokemonType } from "@/types";
+import type { PokemonBaseResult } from "@/types";
 
 class Pokemon {
 
-    async getPokemons(): Promise<PokemonType[]> {
+    async getPokemons(): Promise<PokemonBaseResult[]> {
         try {
             const res = await http.get('pokemon?limit=905&offset=0')
             return res.data.results;
