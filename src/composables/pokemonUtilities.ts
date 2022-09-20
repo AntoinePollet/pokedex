@@ -1,6 +1,6 @@
 export const pokemonIdByUrl =  (url: string) => {
-    const splittedUrl = url.split('/');
-    return url.split('/')[splittedUrl.length - 2];
+    const splitUrl = url.split('/');
+    return url.split('/')[splitUrl.length - 2];
 }
 
 export const pokemonSprite = (id: string | number) => {

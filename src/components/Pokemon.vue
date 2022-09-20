@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col items-center border rounded-xl">
         <div class="bg-[#F2F2F2] w-full rounded-t-xl">
-            <img class="w-1/2 m-auto" :src="pokemonSprite(pokemonIdByUrl(pokemon.url))"  :alt="pokemon.name"/>
+            <img class="w-1/2 m-auto" :src="pokemonSprite(pokemonIdByUrl(pokemon.url))" :alt="pokemon.name"/>
         </div>
         <div class="flex flex-col items-center py-3">
             <div class="font-bold">{{ pokemonIdByUrl(pokemon.url) }}</div>
