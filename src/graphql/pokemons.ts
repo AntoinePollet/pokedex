@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 const POKEMONS = gql`query samplePokeAPIquery {
-    pokemon_v2_pokemon(order_by: {id: asc}) {
+    pokemon_v2_pokemon(limit: 905, order_by: {id: asc}) {
         height
         id
         name
