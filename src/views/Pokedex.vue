@@ -13,6 +13,7 @@ export default defineComponent({
         const { pokedex } = storeToRefs(pokedexStore);
 
         onMounted(async () => {
+            if (pokedex.value.length > 0) return;
             await getPokedex();
         });
 
