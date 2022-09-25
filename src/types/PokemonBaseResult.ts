@@ -1,4 +1,24 @@
 export interface PokemonBaseResult {
+    height: number
     name: string
-    url: string
+    id: number
+    pokemon_v2_pokemonabilities: PokemonAbilities[]
+    pokemon_v2_pokemontypes: PokemonTypes[]
+}
+
+export interface PokemonAbilities {
+    pokemon_v2_ability: {
+        name: string
+        id: number
+        pokemon_v2_abilityeffecttexts: {
+            effect: string
+        }
+    }
+}
+
+export interface PokemonTypes {
+    pokemon_v2_type: {
+        name: string
+        id: number
+    }
 }

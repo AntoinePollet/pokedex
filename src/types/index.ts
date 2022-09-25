@@ -1,8 +1,3 @@
-import type { Abilities } from "@/types/Abilities";
-import type { Moves } from "@/types/Moves";
-import type { Species } from "@/types/Species";
-import type { Types } from "@/types/Types";
-import type { Pokemon } from "@/types/Pokemon";
-import type { PokemonBaseResult } from "@/types/PokemonBaseResult";
+import type { PokemonTypes, PokemonAbilities, PokemonBaseResult } from "@/types/PokemonBaseResult";
 
-export { Abilities, Pokemon, Types, Moves, Species, PokemonBaseResult };
+export { PokemonTypes, PokemonAbilities, PokemonBaseResult };

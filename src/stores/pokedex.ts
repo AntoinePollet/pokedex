@@ -1,20 +1,26 @@
 import { defineStore } from 'pinia'
-import pokemon from "@/services/Pokemon";
 import type { PokemonBaseResult } from "@/types";
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import POKEMONS from "@/graphql/pokemons";
+import { useQuery } from "@vue/apollo-composable";
 
 export const usePokedexStore = defineStore('pokedex', () => {
 
     const pokedex = ref<PokemonBaseResult[]>([]);
 
-    async function getPokedex(): Promise<void> {
+    function getPokedex(): void {
         try {
-            const res: PokemonBaseResult[] = await pokemon.getPokemons();
-            pokedex.value = res;
+            const { loading, error, result } = useQuery(POKEMONS)
+
+            watch(result, () => {
+                pokedex.value = result.value.pokemon_v2_pokemon;
+            })
         } catch (e: any) {
             throw(e);
         }
     }
+
+
 
     return {
         getPokedex,
