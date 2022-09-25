@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
 import type { PokemonTypes } from "@/types";
-import { colorFromType } from "@/composables/pokemonUtilities";
+import { colorFromType } from "@/utilities/pokemonUtilities";
 
 export default defineComponent({
     name: 'PokemonTypes',
@@ -29,4 +29,3 @@ export default defineComponent({
         {{ type.pokemon_v2_type.name }}
     </div>
 </template>
-

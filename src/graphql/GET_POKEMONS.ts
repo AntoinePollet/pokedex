@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-const POKEMONS = gql`query samplePokeAPIquery {
+const GET_POKEMONS = gql`query samplePokeAPIquery {
     pokemon_v2_pokemon(limit: 905, order_by: {id: asc}) {
         height
         id
@@ -23,4 +23,4 @@ const POKEMONS = gql`query samplePokeAPIquery {
     }
 }`
 
-export default POKEMONS
+export default GET_POKEMONS
