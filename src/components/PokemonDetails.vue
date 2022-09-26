@@ -1,12 +1,11 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import Pokemon from "@/components/Pokemon.vue";
 import { usePokedexStore } from "@/stores/pokedex";
 import { storeToRefs } from "pinia";
-import { pokemonSprite, firstUppercase } from "@/utilities/pokemonUtilities";
+import { pokemonSprite, pokemonShinySprite, firstUppercase } from "@/utilities/pokemonUtilities";
 import PokemonTypes from "@/components/PokemonType.vue";
-import type { PokemonBaseResult } from "@/types";
-import PokemonAbility from "@/components/PokemonAbility.vue";
+import PokemonAbility from "@/components/PokemonAbilities.vue";
 
 export default defineComponent({
     name: 'PokemonDetails',
@@ -14,11 +13,14 @@ export default defineComponent({
     setup() {
         const pokedexStore = usePokedexStore();
         const { pokemon } = storeToRefs(pokedexStore);
+        const isDefault = ref<boolean>(true);
 
         return {
             pokemon,
             pokemonSprite,
-            firstUppercase
+            pokemonShinySprite,
+            firstUppercase,
+            isDefault
         }
     }
 });
@@ -27,15 +29,21 @@ export default defineComponent({
 <template>
     <div v-if="pokemon" class="grid grid-cols-3 border rounded-3xl p-10">
         <div class="p-5">
-            <img :src="pokemonSprite(pokemon.id)" :alt="pokemon.name" />
-        </div>
-        <div class="col-span-2 flex flex-col">
-            <div class="border-l text-xl font-bold pl-5 flex">
-                <h3>{{ firstUppercase(pokemon.name) }}</h3>
-                <pokemon-types v-for="type in pokemon.pokemon_v2_pokemontypes" :type="type" />
+            <button @click="isDefault = !isDefault" class="ring ring-2 ring-amber-200 bg-amber-500 text-white font-bold
+                py-2 px-4 rounded-2xl outline-offset-2 hover:bg-amber-600 ring-offset-2">
+                {{ isDefault ? 'Shiny' : 'Default'}}
+            </button>
+            <img :src="isDefault ? pokemonSprite(pokemon.id) : pokemonShinySprite(pokemon.id)" :alt="pokemon.name" />
+            <div class=" font-bold flex flex-col">
+                <h3 class="text-xl">{{ firstUppercase(pokemon.name) }}</h3>
+                <div class="flex text-sm">
+                    <pokemon-types v-for="type in pokemon.pokemon_v2_pokemontypes" :type="type" />
+                </div>
             </div>
-            <div>
-                <pokemon-ability v-for="ability in pokemon.pokemon_v2_pokemonabilities" :ability="ability" />
+        </div>
+        <div class="col-span-2 flex flex-col border-l">
+            <div class="pl-5 text-left">
+                <pokemon-ability :abilities="pokemon.pokemon_v2_pokemonabilities" />
             </div>
         </div>
     </div>
