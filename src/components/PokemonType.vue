@@ -8,7 +8,8 @@ export default defineComponent({
     props: {
         type: {
             type: Object as PropType<PokemonTypes>,
-            default: () => {}
+            default: () => {
+            }
         }
     },
     setup(props) {

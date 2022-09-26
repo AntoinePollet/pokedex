@@ -5,15 +5,6 @@ const GET_POKEMONS = gql`query samplePokeAPIquery {
         height
         id
         name
-        pokemon_v2_pokemonabilities {
-            pokemon_v2_ability {
-                name
-                id
-                pokemon_v2_abilityeffecttexts {
-                    effect
-                }
-            }
-        }
         pokemon_v2_pokemontypes {
             pokemon_v2_type {
                 name

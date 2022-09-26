@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { PokemonBaseResult } from "@/types";
+import type { PokedexBaseResult, PokemonBaseResult } from "@/types";
 import { ref, watch } from "vue";
 import GET_POKEMONS from "@/graphql/getPokemons";
 import { useQuery } from "@vue/apollo-composable";
@@ -9,7 +9,7 @@ import type { OperationVariables } from "@apollo/client";
 
 export const usePokedexStore = defineStore('pokedex', () => {
 
-    const pokedex = ref<PokemonBaseResult[]>([]);
+    const pokedex = ref<PokedexBaseResult[]>([]);
     const pokemon = ref<PokemonBaseResult>();
 
     function getPokedex(): void {

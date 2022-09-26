@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
-import type { PokemonBaseResult } from "@/types";
+import type { PokedexBaseResult } from "@/types";
 import { pokemonSprite, firstUppercase } from "@/utilities/pokemonUtilities"
 import PokemonTypes from "@/components/PokemonType.vue";
 import { useRouter } from "vue-router";
@@ -10,7 +10,7 @@ export default defineComponent({
     components: { PokemonTypes },
     props: {
         pokemon: {
-            type: Object as PropType<PokemonBaseResult>,
+            type: Object as PropType<PokedexBaseResult>,
             default: () => {}
         }
     },
