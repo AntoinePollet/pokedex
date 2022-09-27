@@ -9,7 +9,7 @@ import { DefaultApolloClient } from "@vue/apollo-composable";
 
 const app = createApp({
     setup () {
-        provide(DefaultApolloClient, apolloClient)
+        provide(DefaultApolloClient, apolloClient);
     },
 
     render: () => h(App),
