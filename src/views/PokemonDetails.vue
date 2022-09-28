@@ -30,9 +30,9 @@ export default defineComponent({
             await getPokemon(pokemonId.value);
         });
 
-        watch(pokemonId, () => {
+        watch(pokemonId, async() => {
 
-            getPokemon(pokemonId.value);
+            await getPokemon(pokemonId.value);
 
         })
 
