@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, type PropType } from "vue";
+import { defineComponent, type PropType, toRefs } from "vue";
 import type { PokemonTypes } from "@/types";
 import { colorFromType } from "@/utilities/pokemonUtilities";
 
@@ -13,7 +13,7 @@ export default defineComponent({
         }
     },
     setup(props) {
-        const { type } = props;
+        const { type } = toRefs(props);
 
         return {
             type,

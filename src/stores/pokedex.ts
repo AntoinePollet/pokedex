@@ -17,8 +17,7 @@ export const usePokedexStore = defineStore('pokedex', () => {
             const { data } = await apolloClient.query({
                 query: GET_POKEMONS,
             });
-
-            pokedex.value = data;
+            pokedex.value = data.pokemon_v2_pokemon;
         } catch (e: any) {
             throw(e);
         }

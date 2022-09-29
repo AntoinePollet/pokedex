@@ -21,7 +21,7 @@ export default defineComponent({
         const pokemonId: VariablesParameter<OperationVariables> = computed(() => route.params.id);
 
         const nextPokemon = (async (id: number) => {
-            await router.push({ name: 'pokemonDetails', params: { id: 2 }});
+            await router.push({ name: 'pokemonDetails', params: { id: id }});
         });
 
         const previousPokemon = ((id: number) => {});
@@ -31,8 +31,8 @@ export default defineComponent({
         });
 
         watch(pokemonId, async() => {
-
             await getPokemon(pokemonId.value);
+            console.log(pokemon.value)
 
         })
 
@@ -47,7 +47,6 @@ export default defineComponent({
 
 <template>
     <div class="py-10">
-        <button @click="nextPokemon">click</button>
-        <pokemon-details @next-pokemon="nextPokemon" @previous-pokemon="previousPokemon"/>
+        <pokemon-details @next-pokemon="nextPokemon" @previous-pokemon="previousPokemon" :pokemon="pokemon" />
     </div>
 </template>

@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, type PropType, ref, toRefs, watch } from "vue";
 import Pokemon from "@/components/Pokemon.vue";
 import { usePokedexStore } from "@/stores/pokedex";
 import { storeToRefs } from "pinia";
@@ -9,16 +9,26 @@ import PokemonAbility from "@/components/PokemonAbilities.vue";
 import PokemonMoves from "@/components/PokemonMoves.vue";
 import PokemonEvolutions from "@/components/PokemonEvolutions.vue";
 import { useRouter } from "vue-router";
+import type { PokemonBaseResult } from "@/types";
 
 export default defineComponent({
     name: 'PokemonDetails',
     components: { PokemonEvolutions, PokemonMoves, PokemonAbility, PokemonTypes, Pokemon },
     emits: ['nextPokemon', 'previousPokemon'],
+    props: {
+        pokemon: {
+            type: Object as PropType<PokemonBaseResult>
+        }
+    },
     setup(props, { emit }) {
+        const { pokemon } = toRefs(props);
         const pokedexStore = usePokedexStore();
-        const { pokemon } = storeToRefs(pokedexStore);
         const isDefault = ref<boolean>(true);
         const router = useRouter();
+
+        watch(pokemon, () => {
+            console.log(pokemon.value)
+        });
 
         return {
             pokemon,

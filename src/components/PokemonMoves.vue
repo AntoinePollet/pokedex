@@ -1,5 +1,5 @@
 <script lang="ts" xmlns="http://www.w3.org/1999/html">
-import { defineComponent, type PropType } from "vue";
+import { defineComponent, type PropType, toRefs } from "vue";
 import { firstUppercase } from "@/utilities/pokemonUtilities";
 import type { PokemonMoves } from "@/types/PokemonBaseResult";
 
@@ -13,7 +13,7 @@ export default defineComponent({
         }
     },
     setup(props) {
-        const { moves } = props;
+        const { moves } = toRefs(props);
 
         return {
             moves,
