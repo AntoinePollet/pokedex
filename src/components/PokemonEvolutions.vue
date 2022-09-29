@@ -3,6 +3,7 @@ import { defineComponent, type PropType, toRefs } from "vue";
 import { firstUppercase, pokemonSprite } from "@/utilities/pokemonUtilities";
 import type { PokemonSpecies } from "@/types/PokemonBaseResult";
 import PokemonTypes from "@/components/PokemonType.vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
     name: 'PokemonEvolutions',
@@ -15,12 +16,14 @@ export default defineComponent({
         }
     },
     setup(props) {
+        const router = useRouter();
         const { evolutions } = toRefs(props);
 
         return {
             evolutions,
             firstUppercase,
-            pokemonSprite
+            pokemonSprite,
+            router
         }
     }
 });
@@ -35,8 +38,8 @@ export default defineComponent({
         </div>
         <div class="flex justify-around">
             <div class="flex flex-col items-center" v-for="evolution in evolutions">
-                <div>
-                    <img :src="pokemonSprite(evolution.id)" :alt="evolution.name" />
+                <div class="cursor-pointer">
+                    <img @click="router.push({ name: 'pokemonDetails', params: { id: evolution.id }})" :src="pokemonSprite(evolution.id)" :alt="evolution.name" />
                     <p class="font-medium italic text-lg text-center">{{ evolution.name }}</p>
                 </div>
                 <div class="flex">

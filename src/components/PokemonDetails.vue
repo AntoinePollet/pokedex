@@ -22,13 +22,8 @@ export default defineComponent({
     },
     setup(props, { emit }) {
         const { pokemon } = toRefs(props);
-        const pokedexStore = usePokedexStore();
         const isDefault = ref<boolean>(true);
         const router = useRouter();
-
-        watch(pokemon, () => {
-            console.log(pokemon.value)
-        });
 
         return {
             pokemon,
@@ -44,9 +39,16 @@ export default defineComponent({
 </script>
 
 <template>
-    <div v-if="pokemon" class="grid grid-cols-3 border rounded-3xl p-10">
+    <div v-if="pokemon" class="grid grid-cols-3 border rounded-3xl p-10 relative">
+        <span @click="router.push({ name: 'pokemonDetails', params: { id: pokemon.pokemon_v2_pokemonstat[0].pokemon_v2_pokemon.id +1 }})"
+              class="material-symbols-outlined absolute top-[-20px] left-2/3 z-20 cursor-pointer bg-white rounded-full p-2 border">
+            arrow_forward
+        </span>
+        <span @click="router.push({ name: 'pokemonDetails', params: { id: pokemon.pokemon_v2_pokemonstat[0].pokemon_v2_pokemon.id -1}})"
+              class="material-symbols-outlined absolute top-[-20px] left-1/3 z-20 cursor-pointer bg-white rounded-full p-2 border">
+            arrow_back
+        </span>
         <div class="p-5 mx-auto">
-            <button @click="emit('nextPokemon', pokemon.pokemon_v2_pokemonstat[0].pokemon_v2_pokemon.id + 1)">Go next</button>
             <img :src="isDefault ? pokemonSprite(pokemon.pokemon_v2_pokemonstat[0].pokemon_v2_pokemon.id) : pokemonShinySprite(pokemon.pokemon_v2_pokemonstat[0].pokemon_v2_pokemon.id)"
                  :alt="pokemon.pokemon_v2_pokemonstat[0].pokemon_v2_pokemon.name" class="m-auto"/>
             <div class=" font-bold flex flex-col">
