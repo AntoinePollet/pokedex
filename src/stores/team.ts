@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
+import { ref } from "vue";
 
-export const useTeamStore = defineStore({
-    id: 'team',
-    state: () => ({}),
-    getters: {},
-    actions: {}
-})
+export const useTeamStore = defineStore('team', () => {
+
+    const team = ref([]);
+
+    return { team }
+});
