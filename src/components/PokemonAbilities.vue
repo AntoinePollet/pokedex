@@ -8,8 +8,7 @@ export default defineComponent({
     props: {
         abilities: {
             type: Object as PropType<PokemonAbilities[]>,
-            default: () => {
-            }
+            default: () => []
         }
     },
     setup(props) {
@@ -27,7 +26,10 @@ export default defineComponent({
 <template>
     <div class="flex flex-col px-2 py-1">
         <h1 class="text-2xl italic leading-tight">Abilities</h1>
-        <div class="pl-2" v-for="ability in abilities">
+        <div class="italic pl-2" v-if="abilities.length === 0">
+            No Abilities
+        </div>
+        <div v-else class="pl-2" v-for="ability in abilities" :key="ability.pokemon_v2_ability.id">
             <h5 class="font-bold text-lg">{{ firstUppercase(ability.pokemon_v2_ability.name) }}</h5>
             <div v-if="ability.pokemon_v2_ability.pokemon_v2_abilityeffecttexts.length >= 1" class="leading-6">
                 {{ ability.pokemon_v2_ability.pokemon_v2_abilityeffecttexts[1].effect }}

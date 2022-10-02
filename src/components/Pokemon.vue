@@ -1,9 +1,10 @@
 <script lang="ts">
-import { defineComponent, type PropType } from "vue";
+import { defineComponent, type PropType, ref } from "vue";
 import type { PokedexBaseResult } from "@/types";
 import { pokemonSprite, firstUppercase } from "@/utilities/pokemonUtilities"
 import PokemonTypes from "@/components/PokemonType.vue";
 import { useRouter } from "vue-router";
+import { useIntersectionObserver } from "@vueuse/core";
 
 export default defineComponent({
     name: 'Pokemon',
@@ -17,12 +18,24 @@ export default defineComponent({
     setup(props) {
         const router = useRouter();
         const { pokemon } = props;
+        const pokemonRef = ref(null);
+
+        const { stop } = useIntersectionObserver(
+            pokemonRef,
+            ([{ isIntersecting, target }], observerElement) => {
+                if (isIntersecting && target.classList.contains('lazy')) {
+                    target.src = target.dataset.src;
+                    target.classList.remove('lazy')
+                }
+            },
+        )
 
         return {
             pokemon,
             pokemonSprite,
             firstUppercase,
-            router
+            router,
+            pokemonRef
         }
     }
 });
@@ -32,7 +45,7 @@ export default defineComponent({
 <template>
     <div class="flex flex-col items-center border rounded-xl cursor-pointer">
         <div class="bg-[#F2F2F2] w-full rounded-t-xl py-5" @click="router.push({ name: 'pokemonDetails', params: { id: pokemon.id }})">
-            <img class="w-1/2 m-auto" :src="pokemonSprite(pokemon.id)" :alt="pokemon.name"/>
+            <img ref="pokemonRef" class="w-1/2 m-auto lazy" src="../assets/pokeball.svg" :data-src="pokemonSprite(pokemon.id)" :alt="pokemon.name"/>
             <div class="flex justify-center gap-3 flex-wrap">
                 <pokemon-types v-for="type in pokemon.pokemon_v2_pokemontypes" :type="type" />
             </div>

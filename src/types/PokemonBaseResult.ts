@@ -1,8 +1,18 @@
-import type { PokemonTypes, PokemonAbilities } from "@/types/PokedexBaseResult";
+import type { PokemonTypes } from "@/types/PokedexBaseResult";
 
 export interface PokemonBaseResult {
     pokemon_v2_pokemonstat: PokemonStats[]
     pokemon_v2_evolutionchain: PokemonEvolutions[]
+}
+
+export interface PokemonAbilities {
+    pokemon_v2_ability: {
+        name: string
+        id: number
+        pokemon_v2_abilityeffecttexts: {
+            effect: string
+        }
+    }
 }
 
 export interface PokemonStats {

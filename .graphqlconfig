@@ -1,6 +1,6 @@
 {
-  "name": "Untitled GraphQL Schema",
-  "schemaPath": "https://beta.pokeapi.co/graphql/console/",
+  "name": "PokeAPI Schema",
+  "schemaPath": "./schema.graphql",
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {
