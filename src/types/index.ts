@@ -1,3 +1,4 @@
-import type { PokemonTypes, PokemonAbilities, PokemonBaseResult } from "@/types/PokemonBaseResult";
+import type { PokemonTypes, PokemonAbilities, PokedexBaseResult } from "@/types/PokedexBaseResult";
+import type { PokemonBaseResult } from "@/types/PokemonBaseResult"
 
-export { PokemonTypes, PokemonAbilities, PokemonBaseResult };
+export { PokemonTypes, PokemonAbilities, PokedexBaseResult, PokemonBaseResult };
