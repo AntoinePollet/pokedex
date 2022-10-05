@@ -48,7 +48,7 @@ export default defineComponent({
         <div class="flex gap-y-2 flex-col items-center py-3">
             <div class="font-bold">{{ pokemon.id }}</div>
             <div class="font-bold">{{ firstUppercase(pokemon.name) }}</div>
-            <button :class="alreadyInTeam(pokemon.id) ? 'remove-from-team' : 'add-to-team'" @click="alreadyInTeam(pokemon.id) ? removeFromTeam(pokemon.id) : addToTeam(pokemon)">
+            <button :class="alreadyInTeam(pokemon.id) ? 'remove-from-team' : 'add-to-team'" @click="alreadyInTeam(pokemon.id) ? removeFromTeam(pokemon) : addToTeam(pokemon)">
                 <span v-if="alreadyInTeam(pokemon.id)" class="material-symbols-outlined">
                     remove
                 </span>
