@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { computed, type ComputedRef, ref } from "vue";
 import type { PokedexBaseResult } from "@/types";
+import { createToast } from "mosha-vue-toastify";
 
 export const useTeamStore = defineStore('team', () => {
     const team = ref<PokedexBaseResult[]>([]);
@@ -10,11 +11,16 @@ export const useTeamStore = defineStore('team', () => {
     });
 
     function addToTeam(pokemon: PokedexBaseResult): void {
-        checkTeamSize();
-        const alreadyAdded = !!team.value.find((poke: PokedexBaseResult) => poke.id === pokemon.id);
-        if (!alreadyAdded) {
-            team.value.push(pokemon);
+        try {
+            checkTeamSize();
+            const alreadyAdded = !!team.value.find((poke: PokedexBaseResult) => poke.id === pokemon.id);
+            if (!alreadyAdded) {
+                team.value.push(pokemon);
+            }
+        } catch (e: any) {
+            createToast(e.message, { type: "danger", position: "bottom-right" });
         }
+
     }
 
     function addAndReplace(pokemon: PokedexBaseResult, index: number): void {
@@ -28,7 +34,7 @@ export const useTeamStore = defineStore('team', () => {
 
     function checkTeamSize() {
         if (team.value.length === 6) {
-            throw { message: "Team already at max capacity !" };
+            throw { message: "Team already at max capacity !", description: "Remove a pokemon to add another" };
         }
     }
 

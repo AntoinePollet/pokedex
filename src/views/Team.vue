@@ -1,12 +1,12 @@
 <script lang="ts">
-import Pokemon from "@/components/Pokemon.vue";
 import { defineComponent } from "vue";
 import { storeToRefs } from "pinia";
 import { useTeamStore } from "@/stores/team";
+import PokemonTeam from "@/components/PokemonTeam.vue";
 
 export default defineComponent({
     name: "Team",
-    components: { Pokemon },
+    components: { PokemonTeam },
     setup() {
         const teamStore = useTeamStore();
         const { team } = storeToRefs(teamStore);
@@ -17,8 +17,11 @@ export default defineComponent({
 </script>
 
 <template>
-    <div v-if="team.length > 0" class="grid grid-cols-2 gap-4 pt-10">
-        <pokemon v-for="pokemon in team" :pokemon="pokemon" />
+    <div v-if="team.length > 0" class="grid grid-cols-3 gap-4 py-10">
+        <pokemon-team v-for="pokemon in team" :pokemon="pokemon" />
+    </div>
+    <div v-else class="italic text-3xl font-mono font-bold text-center py-10">
+        No team member, yet !
     </div>
 </template>
 

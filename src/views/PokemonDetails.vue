@@ -19,7 +19,9 @@ export default defineComponent({
         const pokemonId: VariablesParameter<OperationVariables> = computed(() => route.params.id);
 
         onMounted(async () => {
-            await getPokemon(pokemonId.value);
+            if (pokemonId.value) {
+                await getPokemon(pokemonId.value);
+            }
         });
 
         watch(pokemonId, async() => {

@@ -9,3 +9,9 @@
         </div>
     </div>
 </template>
+
+<style>
+.router-link-active {
+    @apply text-amber-800;
+}
+</style>
