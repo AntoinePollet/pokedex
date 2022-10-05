@@ -5,6 +5,7 @@ import { pokemonSprite, firstUppercase } from "@/utilities/pokemonUtilities"
 import PokemonTypes from "@/components/PokemonType.vue";
 import { useRouter } from "vue-router";
 import { useIntersectionObserver } from "@vueuse/core";
+import { useTeamStore } from "@/stores/team";
 
 export default defineComponent({
     name: 'Pokemon',
@@ -17,6 +18,10 @@ export default defineComponent({
     },
     setup(props) {
         const router = useRouter();
+        const teamStore = useTeamStore();
+        const { addToTeam, removeFromTeam } = teamStore;
+        const { alreadyInTeam } = teamStore;
+
         const { pokemon } = props;
         const pokemonRef = ref(null);
 
@@ -35,7 +40,10 @@ export default defineComponent({
             pokemonSprite,
             firstUppercase,
             router,
-            pokemonRef
+            pokemonRef,
+            addToTeam,
+            alreadyInTeam,
+            removeFromTeam
         }
     }
 });
@@ -52,8 +60,9 @@ export default defineComponent({
         </div>
         <div class="flex gap-y-2 flex-col items-center py-3">
             <div class="font-bold">{{ pokemon.id }}</div>
-            <div>{{ firstUppercase(pokemon.name) }}</div>
+            <div class="font-bold">{{ firstUppercase(pokemon.name) }}</div>
+            {{  }}
+            <button @click="alreadyInTeam(pokemon.id) ? removeFromTeam(pokemon.id) : addToTeam(pokemon)">{{ alreadyInTeam(pokemon.id) ? 'Remove from team' : 'Add to team'}}</button>
         </div>
     </div>
 </template>
-

@@ -26,6 +26,6 @@ export default defineComponent({
 
 <template>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 py-10">
-        <pokemon v-for="pokemon in pokedex" :pokemon="pokemon" />
+        <pokemon v-for="pokemon in pokedex" :pokemon="pokemon" :key="pokemon.id" />
     </div>
 </template>
