@@ -1,5 +1,4 @@
 import { useStorage } from "@vueuse/core";
-import { onMounted } from "vue";
 import type { PokedexBaseResult } from "@/types";
 
 export default function teamLocalStorage() {
@@ -7,17 +6,12 @@ export default function teamLocalStorage() {
 
     const addToStorage = ((pokemon: PokedexBaseResult) => {
         pokemonTeam.value[pokemon.name] = pokemon;
-        console.log(pokemonTeam.value)
     });
 
     const removeFromStorage = ((pokemonName: string) => {
-        pokemonTeam.value.delete
-        const pokemonIndex = pokemonTeam.value.findIndex((pokemon: PokedexBaseResult) => pokemon.id === pokemonId);
-        pokemonTeam.value.splice(pokemonIndex, 1);
-    });
-
-    onMounted(() => {
-
+        if (pokemonTeam.value[pokemonName]) {
+            delete pokemonTeam.value[pokemonName];
+        }
     });
 
     return { pokemonTeam, addToStorage, removeFromStorage }
