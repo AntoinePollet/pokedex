@@ -11,8 +11,7 @@ export default defineComponent({
     props: {
         evolutions: {
             type: Array as PropType<PokemonSpecies[]>,
-            default: () => {
-            }
+            default: () => []
         }
     },
     setup(props) {
