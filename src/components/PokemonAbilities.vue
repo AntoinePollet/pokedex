@@ -7,7 +7,7 @@ export default defineComponent({
     name: 'PokemonAbilities',
     props: {
         abilities: {
-            type: Object as PropType<PokemonAbilities[]>,
+            type: Array as PropType<PokemonAbilities[]>,
             default: () => []
         }
     },
