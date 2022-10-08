@@ -38,16 +38,16 @@ export default defineComponent({
 </script>
 
 <template>
-    <div class="flex flex-col items-center border rounded-xl cursor-pointer">
-        <div class="bg-[#F2F2F2] w-full rounded-t-xl py-5" @click="router.push({ name: 'pokemonDetails', params: { id: pokemon.id }})">
+    <div class="flex flex-col items-center rounded-3xl border">
+        <div class="bg-gray-50 relative rounded-t-3xl w-full py-5 cursor-pointer" @click="router.push({ name: 'pokemonDetails', params: { id: pokemon.id }})">
             <img ref="pokemonRef" class="w-1/2 m-auto" :src="pokemonSprite(pokemon.id)" :alt="pokemon.name"/>
             <div class="flex justify-center gap-3 flex-wrap">
                 <pokemon-types v-for="type in pokemon.pokemon_v2_pokemontypes" :type="type" />
             </div>
+            <div class="absolute top-[1rem] left-[1rem] font-bold">{{ pokemon.id }}</div>
         </div>
-        <div class="flex gap-y-2 flex-col items-center py-3">
-            <div class="font-bold">{{ pokemon.id }}</div>
-            <div class="font-bold">{{ firstUppercase(pokemon.name) }}</div>
+        <div class="flex gap-y-2 items-center justify-around py-3 w-3/4">
+            <p class="font-bold text-md">{{ firstUppercase(pokemon.name) }}</p>
             <button :class="alreadyInTeam(pokemon.id) ? 'remove-from-team' : 'add-to-team'" @click="alreadyInTeam(pokemon.id) ? removeFromTeam(pokemon) : addToTeam(pokemon)">
                 <span v-if="alreadyInTeam(pokemon.id)" class="material-symbols-outlined">
                     remove

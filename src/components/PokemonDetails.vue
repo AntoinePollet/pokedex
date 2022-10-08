@@ -28,6 +28,14 @@ export default defineComponent({
             }
         });
 
+        const switchSprite = computed(() => {
+            if (isDefault.value) {
+                return 'Click me to switch to shiny';
+            } else {
+                return 'Click me to switch to default';
+            }
+        });
+
         return {
             pokemon,
             pokemonStat,
@@ -35,7 +43,8 @@ export default defineComponent({
             pokemonShinySprite,
             firstUppercase,
             isDefault,
-            router
+            router,
+            switchSprite
         }
     }
 });
@@ -66,10 +75,7 @@ export default defineComponent({
                 </div>
             </div>
             <div class="flex justify-center pt-4">
-                <button @click="isDefault = !isDefault" class="ring ring-2 ring-emerald-50 bg-emerald-200 text-white font-medium
-                py-1 px-3 rounded-2xl outline-offset-2 hover:bg-emerald-300 ring-offset-2 text-sm">
-                    {{ isDefault ? 'Shiny' : 'Default' }}
-                </button>
+                <p @click="isDefault = !isDefault" class="italic text-sm font-mono cursor-pointer bg-gray-100 p-1 rounded-lg">{{ switchSprite }}</p>
             </div>
         </div>
         <div class="col-span-2 flex flex-col border-l">

@@ -43,7 +43,7 @@ export const useTeamStore = defineStore('team', () => {
 
     function checkTeamSize() {
         if (team.value.length === 6) {
-            throw { message: "Team already at max capacity !", description: "Remove a pokemon to add another" };
+            throw { message: "Team already at max capacity !" };
         }
     }
 
