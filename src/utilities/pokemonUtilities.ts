@@ -30,6 +30,10 @@ export const colorFromType = (type: string) => {
         fairy: { bg: '#D685AD', text: 'black' },
     };
 
-    return colours[type];
+    if (type) {
+        return colours[type];
+    } else {
+        return colours;
+    }
 }
 
