@@ -5,20 +5,29 @@ import { usePokedexStore } from "@/stores/pokedex";
 import { storeToRefs } from "pinia";
 import Filters from "@/components/Filters.vue";
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
-
+import localStorage from "@/composables/localStorage";
+import { createToast } from "mosha-vue-toastify";
 export default defineComponent({
     name: 'Pokedex',
     components: { Filters, Pokemon, PulseLoader },
     setup() {
         const pokedexStore = usePokedexStore();
-        const { getPokedex } = pokedexStore;
+        const { getFilteredPokemons } = pokedexStore;
         const { pokedex } = storeToRefs(pokedexStore);
+
+        const storage = localStorage();
+        const { filters } = storage;
 
         const isLoading = ref<boolean>(false);
 
         onMounted(async () => {
-            isLoading.value = true;
-            await getPokedex();
+            try {
+                isLoading.value = true;
+                await getFilteredPokemons(filters.value.search, filters.value.types);
+                isLoading.value = false;
+            } catch (e: any) {
+                createToast('Error while fetching data', { type: "danger", position: "bottom-right" });
+            }
             isLoading.value = false;
         });
 
@@ -32,7 +41,7 @@ export default defineComponent({
 
 <template>
     <div>
-        <filters class="flex justify-center gap-x-3 pt-5" />
+        <filters class="flex justify-center gap-x-3 pt-5" @loading="isLoading = $event"/>
 
         <div v-if="isLoading" class="pt-20">
             <PulseLoader :loading="isLoading" class="flex items-center justify-center" color="#fcd34d"></PulseLoader>
