@@ -2,11 +2,11 @@ import { defineStore } from 'pinia'
 import { computed, type ComputedRef, onMounted, ref } from "vue";
 import type { PokedexBaseResult } from "@/types";
 import { createToast } from "mosha-vue-toastify";
-import teamLocalStorage from "@/composables/localStorage";
+import localStorage from "@/composables/localStorage";
 
 export const useTeamStore = defineStore('team', () => {
     const team = ref<PokedexBaseResult[]>([]);
-    const { pokemonTeam, addToStorage, removeFromStorage } = teamLocalStorage();
+    const { pokemonTeam, addToStorage, removeFromStorage } = localStorage();
 
     onMounted(() => {
         for (let pokemon of Object.values(pokemonTeam.value)) {

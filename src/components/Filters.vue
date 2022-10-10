@@ -1,16 +1,18 @@
 <script lang="ts">
-import { defineComponent, reactive, ref, watch } from "vue";
+import { defineComponent, onMounted, reactive, ref, watch } from "vue";
 import { colorFromType } from "@/utilities/pokemonUtilities";
 import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from "@headlessui/vue"
-import { apolloClient } from "@/apollo";
-import GET_FILTERED_POKEMONS from "@/graphql/getFilteredPokemons";
+import localStorage from "@/composables/localStorage";
 import { usePokedexStore } from "@/stores/pokedex";
 
 export default defineComponent({
     components: { Listbox, ListboxOption, ListboxOptions, ListboxButton },
-    setup() {
+    setup(props, { emit }) {
         const pokedexStore = usePokedexStore();
         const { getFilteredPokemons } = pokedexStore;
+        const storage = localStorage();
+        const { addFiltersToStorage } = storage;
+        const { filters } = localStorage();
 
         const filter = reactive({
             search: '',
@@ -21,14 +23,24 @@ export default defineComponent({
         const filterPokemons = (event: any) => {
             clearTimeout(timer);
             timer = setTimeout(async () => {
+                emit('loading', true);
                 await getFilteredPokemons(filter.search, filter.types);
+                emit('loading', false);
             }, 1000);
         }
         watch(filter, async (value, oldValue) => {
+            if (value) {
+                addFiltersToStorage(value);
+            }
             if (value.types) {
                 await getFilteredPokemons(filter.search, filter.types);
             }
         }, { deep: true });
+
+        onMounted(() => {
+            filter.search = filters.value.search;
+            filter.types = filters.value.types;
+        });
 
         return { filter, colorFromType, filterPokemons }
     }
