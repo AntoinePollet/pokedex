@@ -2,20 +2,35 @@
 import { defineComponent, reactive, ref, watch } from "vue";
 import { colorFromType } from "@/utilities/pokemonUtilities";
 import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from "@headlessui/vue"
+import { apolloClient } from "@/apollo";
+import GET_FILTERED_POKEMONS from "@/graphql/getFilteredPokemons";
+import { usePokedexStore } from "@/stores/pokedex";
 
 export default defineComponent({
     components: { Listbox, ListboxOption, ListboxOptions, ListboxButton },
     setup() {
+        const pokedexStore = usePokedexStore();
+        const { getFilteredPokemons } = pokedexStore;
+
         const filter = reactive({
             search: '',
             types: []
         });
 
-        watch(filter, (value) => {
-            // TODO: DO LOGIC HERE, NEW GRAPHQL QUERY WITH VARIABLES
-        },{ deep: true });
+        let timer: any;
+        const filterPokemons = (event: any) => {
+            clearTimeout(timer);
+            timer = setTimeout(async () => {
+                await getFilteredPokemons(filter.search, filter.types);
+            }, 1000);
+        }
+        watch(filter, async (value, oldValue) => {
+            if (value.types) {
+                await getFilteredPokemons(filter.search, filter.types);
+            }
+        }, { deep: true });
 
-        return { filter, colorFromType }
+        return { filter, colorFromType, filterPokemons }
     }
 });
 </script>
@@ -23,7 +38,7 @@ export default defineComponent({
 <template>
     <div class="flex">
         <div>
-            <input v-model="filter.search" type="search" autocomplete="off" placeholder="Search by name ..."
+            <input v-model="filter.search" @input="filterPokemons" type="search" autocomplete="off" placeholder="Search by name ..."
                    class="border bg-gray-50 border-gray-300 text-gray-900 font-mono rounded-md p-2 text-sm
                    placeholder-gray-400 focus:ring-amber-500 focus:border-amber-500 outline-0"/>
         </div>
