@@ -31,8 +31,14 @@ export default defineComponent({
         </div>
         <div v-else class="pl-2" v-for="ability in abilities" :key="ability.pokemon_v2_ability.id">
             <h5 class="font-bold text-lg">{{ firstUppercase(ability.pokemon_v2_ability.name) }}</h5>
-            <div v-if="ability.pokemon_v2_ability.pokemon_v2_abilityeffecttexts.length >= 1" class="leading-6">
+            <div v-if="ability.pokemon_v2_ability.pokemon_v2_abilityeffecttexts[1]" class="leading-6">
                 {{ ability.pokemon_v2_ability.pokemon_v2_abilityeffecttexts[1].effect }}
+            </div>
+            <div v-else-if="ability.pokemon_v2_ability.pokemon_v2_abilityeffecttexts[0]" class="leading-6">
+                {{ ability.pokemon_v2_ability.pokemon_v2_abilityeffecttexts[0].effect }}
+            </div>
+            <div v-else class="italic pl-2">
+                No description
             </div>
         </div>
     </div>
