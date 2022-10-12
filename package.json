@@ -11,6 +11,7 @@
   "dependencies": {
     "@apollo/client": "^3.6.9",
     "@headlessui/vue": "^1.7.3",
+    "@shopify/draggable": "^1.0.0-beta.8",
     "@types/axios": "^0.14.0",
     "@vue/apollo-composable": "^4.0.0-alpha.19",
     "@vueuse/core": "^9.3.0",

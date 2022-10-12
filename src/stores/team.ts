@@ -1,21 +1,25 @@
 import { defineStore } from 'pinia'
-import { computed, type ComputedRef, onMounted, ref } from "vue";
+import { computed, type ComputedRef, onMounted, type Ref, ref } from "vue";
 import type { PokedexBaseResult } from "@/types";
 import { createToast } from "mosha-vue-toastify";
 import localStorage from "@/composables/localStorage";
 
 export const useTeamStore = defineStore('team', () => {
-    const team = ref<PokedexBaseResult[]>([]);
+    const team: Ref<PokedexBaseResult[]> = ref<PokedexBaseResult[]>([]);
     const { pokemonTeam, addToStorage, removeFromStorage } = localStorage();
 
     onMounted(() => {
-        for (let pokemon of Object.values(pokemonTeam.value)) {
+        for (let pokemon of pokemonTeam.value) {
             team.value.push(pokemon);
         }
     });
 
     const alreadyInTeam: ComputedRef<boolean> = computed<boolean>((): any => {
         return (pokemonId: number): boolean => !!team.value.find((poke: PokedexBaseResult) => poke.id === pokemonId);
+    });
+
+    const pokemonIndex: ComputedRef<number> = computed<number>((): any => {
+        return (pokemonId: number): number => team.value.findIndex((poke: PokedexBaseResult) => poke.id === pokemonId);
     });
 
     function addToTeam(pokemon: PokedexBaseResult): void {
@@ -31,13 +35,15 @@ export const useTeamStore = defineStore('team', () => {
         }
     }
 
-    function addAndReplace(pokemon: PokedexBaseResult, index: number): void {
-        team.value.splice(index, 1, pokemon);
+    function addAndReplace(swappedElementIndex: number, sourceElement: number): void {
+        const temp = team.value[swappedElementIndex];
+        team.value[swappedElementIndex] = team.value[sourceElement]
+        team.value[sourceElement] = temp;
     }
 
     function removeFromTeam(pokemon: PokedexBaseResult): void {
         const pokemonIndex = team.value.findIndex((poke: PokedexBaseResult) => poke.id === pokemon.id);
-        removeFromStorage(pokemon.name);
+        removeFromStorage(pokemon.id);
         team.value.splice(pokemonIndex, 1);
     }
 
@@ -47,5 +53,5 @@ export const useTeamStore = defineStore('team', () => {
         }
     }
 
-    return { team, addToTeam, removeFromTeam, addAndReplace, alreadyInTeam }
+    return { team, addToTeam, removeFromTeam, addAndReplace, alreadyInTeam, pokemonIndex }
 });

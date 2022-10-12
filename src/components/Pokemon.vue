@@ -52,7 +52,7 @@ export default defineComponent({
 
 <template>
     <div class="flex flex-col items-center border rounded-xl">
-        <div class="bg-[#F2F2F2] w-full rounded-t-xl py-5 cursor-pointer relative" @click="router.push({ name: 'pokemonDetails', params: { id: pokemon.id }})">
+        <div class="bg-[#F2F2F2] w-full rounded-t-xl py-5 cursor-pointer relative item" @click="router.push({ name: 'pokemonDetails', params: { id: pokemon.id }})">
             <img ref="pokemonRef" class="w-1/2 m-auto lazy" src="../assets/pokeball.svg" :data-src="pokemonSprite(pokemon.id)" :alt="pokemon.name"/>
             <div class="flex justify-center gap-3 flex-wrap">
                 <pokemon-types v-for="type in pokemon.pokemon_v2_pokemontypes" :type="type" />

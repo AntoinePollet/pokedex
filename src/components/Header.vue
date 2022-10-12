@@ -1,7 +1,7 @@
 <template>
     <div class="h-[64px] w-full bg-amber-300 fixed z-50">
         <div class="flex h-full justify-center gap-x-3 items-center italic leading-loose text-lg relative">
-            <div class="absolute left-5 top-1/2 w-[32px] h-[32px] cursor-pointer" style="transform: translateY(-50%);">
+            <div @click="burgerOpened = !burgerOpened" class="absolute left-5 top-1/2 w-[32px] h-[32px] cursor-pointer" style="transform: translateY(-50%);">
                 <span class="material-symbols-outlined">
                     menu
                 </span>
@@ -12,6 +12,16 @@
     </div>
 </template>
 
+<script lang="ts">
+import { burgerOpened } from "@/composables/burgerMenu";
+import { defineComponent } from "vue";
+
+export default defineComponent({
+    setup() {
+        return { burgerOpened }
+    }
+})
+</script>
 <style>
 .router-link-active {
     @apply text-amber-800;
