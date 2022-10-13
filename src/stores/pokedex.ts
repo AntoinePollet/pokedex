@@ -40,6 +40,7 @@ export const usePokedexStore = defineStore('pokedex', () => {
     }
 
     function getPokemonById(id: number): PokedexBaseResult {
+        // @ts-ignore
         return pokedex.value.find((poke: PokedexBaseResult) => poke.id === id);
     }
 
