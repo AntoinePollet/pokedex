@@ -8,6 +8,10 @@
             </div>
             <router-link class="hover:text-amber-800 font-bold" to="/" >Pokedex</router-link>
             <router-link class="hover:text-amber-800 font-bold" to="/team" >Team</router-link>
+            <div>
+                <ClearTeamButton />
+                <GenerateTeamButton />
+            </div>
         </div>
     </div>
 </template>
@@ -17,3 +21,10 @@
     @apply text-amber-800;
 }
 </style>
+<script lang="ts">
+import ClearTeamButton from "@/components/ClearTeamButton.vue";
+import GenerateTeamButton from "@/components/GenerateTeamButton.vue";
+export default {
+    components: { GenerateTeamButton, ClearTeamButton }
+}
+</script>

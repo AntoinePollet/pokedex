@@ -3,10 +3,14 @@ import { computed, type ComputedRef, onMounted, ref } from "vue";
 import type { PokedexBaseResult } from "@/types";
 import { createToast } from "mosha-vue-toastify";
 import localStorage from "@/composables/localStorage";
+import { usePokedexStore } from "@/stores/pokedex";
 
 export const useTeamStore = defineStore('team', () => {
     const team = ref<PokedexBaseResult[]>([]);
     const { pokemonTeam, addToStorage, removeFromStorage } = localStorage();
+
+    const pokedexStore = usePokedexStore();
+    const { pokedex } = pokedexStore;
 
     onMounted(() => {
         for (let pokemon of Object.values(pokemonTeam.value)) {
@@ -31,14 +35,23 @@ export const useTeamStore = defineStore('team', () => {
         }
     }
 
-    function addAndReplace(pokemon: PokedexBaseResult, index: number): void {
-        team.value.splice(index, 1, pokemon);
-    }
-
     function removeFromTeam(pokemon: PokedexBaseResult): void {
         const pokemonIndex = team.value.findIndex((poke: PokedexBaseResult) => poke.id === pokemon.id);
         removeFromStorage(pokemon.name);
         team.value.splice(pokemonIndex, 1);
+    }
+
+    function generateTeam(): void {
+        resetTeam();
+        for(let i = 0; i < 6; i ++) {
+            console.log(pokedex)
+            const random = Math.round(Math.random() * pokedex.length);
+            console.log(random)
+        }
+    }
+
+    function resetTeam(): void {
+        team.value = [];
     }
 
     function checkTeamSize() {
@@ -47,5 +60,5 @@ export const useTeamStore = defineStore('team', () => {
         }
     }
 
-    return { team, addToTeam, removeFromTeam, addAndReplace, alreadyInTeam }
+    return { team, addToTeam, removeFromTeam, resetTeam, alreadyInTeam, generateTeam }
 });
