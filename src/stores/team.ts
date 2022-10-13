@@ -50,11 +50,11 @@ export const useTeamStore = defineStore('team', () => {
     function generateTeam(): void {
         resetTeam(false);
         resetStorage();
-        let pokemonIds: Number[] = [];
-        while (pokemonIds.length < 6) {
-            const randomIndex = Math.round(Math.random() * pokedex.value.length);
-            if (!pokemonIds.includes(randomIndex)) {
-                pokemonIds.push(randomIndex);
+        let pokemonIndex: Number[] = [];
+        while (pokemonIndex.length < 6) {
+            const randomIndex = Math.round(Math.random() * (pokedex.value.length-1));
+            if (!pokemonIndex.includes(randomIndex)) {
+                pokemonIndex.push(randomIndex);
                 const pokemonId: number = pokedex.value[randomIndex].id;
                 addToTeam(getPokemonById(pokemonId));
             }

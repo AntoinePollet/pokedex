@@ -16,7 +16,7 @@ export default function localStorage() {
     });
 
     const resetStorage = (): void => {
-        pokemonTeam.value = [];
+        pokemonTeam.value = {};
     }
 
     const addFiltersToStorage = ((filter: Object) => {
