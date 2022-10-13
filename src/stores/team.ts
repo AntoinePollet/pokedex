@@ -1,14 +1,20 @@
-import { defineStore } from 'pinia'
+import { defineStore, storeToRefs } from 'pinia'
 import { computed, type ComputedRef, onMounted, ref } from "vue";
 import type { PokedexBaseResult } from "@/types";
 import { createToast } from "mosha-vue-toastify";
 import localStorage from "@/composables/localStorage";
+import { usePokedexStore } from "@/stores/pokedex";
 
 export const useTeamStore = defineStore('team', () => {
     const team = ref<PokedexBaseResult[]>([]);
-    const { pokemonTeam, addToStorage, removeFromStorage } = localStorage();
+    const { pokemonTeam, addToStorage, removeFromStorage, resetStorage } = localStorage();
+
+    const pokedexStore = usePokedexStore();
+    const { pokedex } = storeToRefs(pokedexStore);
+    const { getPokemonById } = pokedexStore;
 
     onMounted(() => {
+        //@ts-ignore
         for (let pokemon of Object.values(pokemonTeam.value)) {
             team.value.push(pokemon);
         }
@@ -16,6 +22,10 @@ export const useTeamStore = defineStore('team', () => {
 
     const alreadyInTeam: ComputedRef<boolean> = computed<boolean>((): any => {
         return (pokemonId: number): boolean => !!team.value.find((poke: PokedexBaseResult) => poke.id === pokemonId);
+    });
+
+    const teamSize: ComputedRef<number> = computed<number>(() => {
+        return team.value.length;
     });
 
     function addToTeam(pokemon: PokedexBaseResult): void {
@@ -31,14 +41,30 @@ export const useTeamStore = defineStore('team', () => {
         }
     }
 
-    function addAndReplace(pokemon: PokedexBaseResult, index: number): void {
-        team.value.splice(index, 1, pokemon);
-    }
-
     function removeFromTeam(pokemon: PokedexBaseResult): void {
         const pokemonIndex = team.value.findIndex((poke: PokedexBaseResult) => poke.id === pokemon.id);
         removeFromStorage(pokemon.name);
         team.value.splice(pokemonIndex, 1);
+    }
+
+    function generateTeam(): void {
+        resetTeam(false);
+        resetStorage();
+        let pokemonIds: Number[] = [];
+        while (pokemonIds.length < 6) {
+            const randomIndex = Math.round(Math.random() * pokedex.value.length);
+            if (!pokemonIds.includes(randomIndex)) {
+                pokemonIds.push(randomIndex);
+                const pokemonId: number = pokedex.value[randomIndex].id;
+                addToTeam(getPokemonById(pokemonId));
+            }
+        }
+        createToast("Team generated", { type: "success", position: "bottom-right" });
+    }
+
+    function resetTeam(showToast: boolean): void {
+        team.value = [];
+        if (showToast) createToast("Team reset", { type: "success", position: "bottom-right" });
     }
 
     function checkTeamSize() {
@@ -47,5 +73,5 @@ export const useTeamStore = defineStore('team', () => {
         }
     }
 
-    return { team, addToTeam, removeFromTeam, addAndReplace, alreadyInTeam }
+    return { team, addToTeam, removeFromTeam, resetTeam, alreadyInTeam, generateTeam, teamSize }
 });
