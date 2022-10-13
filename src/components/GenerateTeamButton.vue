@@ -18,6 +18,6 @@ export default defineComponent({
 
 <template>
     <div>
-        <button @click="generateRandomTeam">Generate</button>
+        <button class="button-header" @click="generateRandomTeam">Generate</button>
     </div>
 </template>

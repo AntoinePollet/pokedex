@@ -9,3 +9,11 @@
 .remove-from-team {
     @apply bg-red-600 p-1 rounded-full shadow-2xl ring-1 ring-offset-1 ring-red-200 hover:bg-red-700 text-white font-mono flex items-center
 }
+
+.button-header {
+    @apply bg-amber-700 py-1 px-2 rounded-2xl hover:bg-amber-800 text-white font-mono flex items-center
+}
+
+.button-header-reset {
+    @apply bg-amber-50 py-1 px-2 rounded-2xl hover:bg-black hover:text-white text-red-500 font-mono flex items-center font-bold
+}

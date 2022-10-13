@@ -7,7 +7,7 @@ export default defineComponent({
         const teamStore = useTeamStore();
         const { resetTeam } = teamStore;
         const clearTeam = () => {
-            resetTeam();
+            resetTeam(true);
         }
 
         return { clearTeam }
@@ -18,6 +18,6 @@ export default defineComponent({
 
 <template>
     <div>
-        <button @click="clearTeam">Reset</button>
+        <button class="button-header-reset" @click="clearTeam">Reset</button>
     </div>
 </template>
