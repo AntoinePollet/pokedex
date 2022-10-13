@@ -51,15 +51,19 @@ export const useTeamStore = defineStore('team', () => {
         resetTeam(false);
         resetStorage();
         let pokemonIndex: Number[] = [];
-        while (pokemonIndex.length < 6) {
-            const randomIndex = Math.round(Math.random() * (pokedex.value.length-1));
-            if (!pokemonIndex.includes(randomIndex)) {
-                pokemonIndex.push(randomIndex);
-                const pokemonId: number = pokedex.value[randomIndex].id;
-                addToTeam(getPokemonById(pokemonId));
+        if (pokedex.value.length > 6) {
+            while (pokemonIndex.length < 6) {
+                const randomIndex = Math.round(Math.random() * (pokedex.value.length-1));
+                if (!pokemonIndex.includes(randomIndex)) {
+                    pokemonIndex.push(randomIndex);
+                    const pokemonId: number = pokedex.value[randomIndex].id;
+                    addToTeam(getPokemonById(pokemonId));
+                }
             }
+            createToast("Team generated", { type: "success", position: "bottom-right" });
+        } else {
+            createToast("Please update filters to generate team", { type: "danger", position: "bottom-right" });
         }
-        createToast("Team generated", { type: "success", position: "bottom-right" });
     }
 
     function resetTeam(showToast: boolean): void {
