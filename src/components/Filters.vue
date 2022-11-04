@@ -7,6 +7,7 @@ import { usePokedexStore } from "@/stores/pokedex";
 
 export default defineComponent({
     components: { Listbox, ListboxOption, ListboxOptions, ListboxButton },
+    emits: ['loading'],
     setup(props, { emit }) {
         const pokedexStore = usePokedexStore();
         const { getFilteredPokemons } = pokedexStore;
@@ -20,6 +21,7 @@ export default defineComponent({
         });
 
         let timer: any;
+
         const filterPokemons = (event: any) => {
             clearTimeout(timer);
             timer = setTimeout(async () => {
@@ -28,14 +30,16 @@ export default defineComponent({
                 emit('loading', false);
             }, 1000);
         }
-        watch(filter, async (value, oldValue) => {
+
+        watch(() => filter.types,
+            async (value, oldValue) => {
             if (value) {
-                addFiltersToStorage(value);
-            }
-            if (value.types) {
+                addFiltersToStorage(filter);
+                emit('loading', true);
                 await getFilteredPokemons(filter.search, filter.types);
+                emit('loading', false);
             }
-        }, { deep: true });
+        });
 
         onMounted(() => {
             filter.search = filters.value.search;

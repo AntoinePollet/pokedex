@@ -58,10 +58,10 @@ export default defineComponent({
 
 <template>
     <div v-if="isLoading" class="pt-20">
-        <PulseLoader :loading="isLoading" class="flex items-center justify-center" color="#fcd34d"></PulseLoader>
+        <PulseLoader :loading="isLoading" class="flex items-center justify-center" color="#fcd34d" />
     </div>
 
     <div v-else class="py-10">
-        <pokemon-details :pokemon="pokemon"/>
+        <pokemon-details :pokemon="pokemon" />
     </div>
 </template>

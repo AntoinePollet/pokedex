@@ -4,9 +4,10 @@ import Pokemon from "@/components/Pokemon.vue";
 import { usePokedexStore } from "@/stores/pokedex";
 import { storeToRefs } from "pinia";
 import Filters from "@/components/Filters.vue";
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import localStorage from "@/composables/localStorage";
 import { createToast } from "mosha-vue-toastify";
+
 export default defineComponent({
     name: 'Pokedex',
     components: { Filters, Pokemon, PulseLoader },
@@ -41,13 +42,17 @@ export default defineComponent({
 
 <template>
     <div>
-        <filters class="flex justify-center gap-x-3 pt-5" @loading="isLoading = $event"/>
+        <filters class="flex justify-center gap-x-3 pt-5" @loading="isLoading = $event" />
 
         <div v-if="isLoading" class="pt-20">
-            <PulseLoader :loading="isLoading" class="flex items-center justify-center" color="#fcd34d"></PulseLoader>
+            <PulseLoader :loading="isLoading" class="flex items-center justify-center" color="#fcd34d" />
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 py-10">
+        <div v-else-if="pokedex.length === 0" class="text-2xl italic leading-tight text-center pt-5">
+            No pokemons found
+        </div>
+
+        <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 py-10">
             <pokemon v-for="pokemon in pokedex" :pokemon="pokemon" :key="pokemon.id" />
         </div>
     </div>

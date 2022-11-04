@@ -1,21 +1,16 @@
 <template>
     <div class="h-[64px] w-full bg-amber-300 fixed z-50">
         <div class="flex items-center h-full italic leading-loose text-lg relative w-full">
-<!--            <div class="absolute left-5 top-1/2 w-[32px] h-[32px] cursor-pointer" style="transform: translateY(-50%);">-->
-<!--                <span class="material-symbols-outlined">-->
-<!--                    menu-->
-<!--                </span>-->
-<!--            </div>-->
             <div class="flex gap-x-3 absolute left-1/2 top-1/2" style="transform: translate(-50%, -50%);">
                 <router-link class="hover:text-amber-800 font-bold" to="/">Pokedex</router-link>
                 <div class="flex items-center gap-x-1">
                     <router-link class="hover:text-amber-800 font-bold" to="/team">Team</router-link>
-                    <Badge :badge-number="teamSize" />
+                    <badge :badge-number="teamSize" />
                 </div>
             </div>
             <div class="flex ml-auto gap-x-3 pr-3">
-                <ClearTeamButton/>
-                <GenerateTeamButton/>
+                <clear-team-button />
+                <generate-team-button />
             </div>
         </div>
     </div>
