@@ -36,13 +36,13 @@ export default defineComponent({
             This Pokémon does not evolve.
         </div>
         <div class="flex justify-around">
-            <div class="flex flex-col items-center" v-for="evolution in evolutions">
+            <div class="flex flex-col items-center" v-for="evolution in evolutions" :key="evolution.id">
                 <div class="cursor-pointer">
                     <img @click="router.push({ name: 'pokemonDetails', params: { id: evolution.id }})" :src="pokemonSprite(evolution.id)" :alt="evolution.name" />
                     <p class="font-medium italic text-lg text-center">{{ evolution.name }}</p>
                 </div>
-                <div class="flex">
-                    <pokemon-types v-for="type in evolution.pokemon_v2_pokemons[0].pokemon_v2_pokemontypes" :type="type" />
+                <div class="flex gap-2">
+                    <pokemon-types v-for="type in evolution.pokemon_v2_pokemons[0].pokemon_v2_pokemontypes" :type="type" :key="type"/>
                 </div>
             </div>
 
