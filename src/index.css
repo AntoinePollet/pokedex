@@ -11,9 +11,9 @@
 }
 
 .button-header {
-    @apply bg-amber-700 py-1 px-2 rounded-2xl hover:bg-amber-800 text-white font-mono flex items-center
+    @apply dark:bg-dark-2 dark:text-white dark:hover:bg-dark-3 font-bold bg-amber-700 py-1 px-2 rounded-2xl hover:bg-amber-800 text-white font-mono flex items-center
 }
 
 .button-header-reset {
-    @apply bg-amber-50 py-1 px-2 rounded-2xl hover:bg-black hover:text-white text-red-500 font-mono flex items-center font-bold
+    @apply dark:bg-amber-100 dark:text-dark-1 dark:hover:bg-amber-50 bg-amber-50 py-1 px-2 rounded-2xl hover:bg-amber-100 text-red-500 font-mono flex items-center font-bold
 }

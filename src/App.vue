@@ -1,8 +1,10 @@
 
 <template>
     <Header />
-    <div class="pt-[64px] w-[80%] m-auto">
-        <router-view></router-view>
+    <div class="pt-[64px] dark:bg-dark-1 overflow-auto dark:text-white" style="height: 100vh;">
+        <div class="w-[80%] m-auto">
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 
@@ -33,6 +35,8 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-
+<style>
+html.dark {
+    color-scheme: dark;
+}
 </style>
