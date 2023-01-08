@@ -52,7 +52,7 @@ export default defineComponent({
             No pokemons found
         </div>
 
-        <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 py-10">
+        <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 py-10">
             <pokemon v-for="pokemon in pokedex" :pokemon="pokemon" :key="pokemon.id" />
         </div>
     </div>

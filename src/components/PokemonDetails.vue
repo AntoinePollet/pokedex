@@ -51,7 +51,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <div v-if="pokemon" class="grid grid-cols-3 border rounded-3xl p-10 relative">
+    <div v-if="pokemon && pokemonStat" class="grid grid-cols-1 md:grid-cols-3 border rounded-3xl p-5 md:p-10 relative">
         <span @click="router.push({ name: 'pokemonDetails', params: { id: pokemonStat.id +1 }})"
             :class="(pokemonStat.id === 905 ? 'bg-gray-100 cursor-default pointer-events-none' : 'hover:bg-gray-100 cursor-pointer') +
             ' material-symbols-outlined absolute top-[-20px] left-2/3 z-20 bg-white dark:text-dark-1 rounded-full p-2 border'">
@@ -62,10 +62,10 @@ export default defineComponent({
             ' material-symbols-outlined absolute top-[-20px] left-1/3 z-20 bg-white dark:text-dark-1 rounded-full p-2 border'">
             arrow_back
         </span>
-        <div class="p-5 mx-auto">
+        <div class="p-5 md:mx-auto">
             <img :src="isDefault ? pokemonSprite(pokemonStat.id) : pokemonShinySprite(pokemonStat.id)"
                 :alt="pokemonStat.name" class="m-auto"/>
-            <div class=" font-bold flex flex-col">
+            <div class=" font-bold flex justify-center gap-2 md:flex-col">
                 <h3 class="text-xl text-center">
                     {{ firstUppercase(pokemonStat.name) }}</h3>
                 <div class="flex justify-center gap-2 text-sm">
@@ -78,14 +78,14 @@ export default defineComponent({
                 <p @click="isDefault = !isDefault" class="italic text-sm font-mono cursor-pointer bg-gray-100 dark:text-dark-1 p-1 rounded-lg">{{ switchSprite }}</p>
             </div>
         </div>
-        <div class="col-span-2 flex flex-col border-l">
-            <div class="pl-5 text-left">
+        <div class="col-span-2 flex flex-col md:border-l">
+            <div class="md:pl-5 text-left">
                 <pokemon-ability
                     :abilities="pokemonStat.pokemon_v2_pokemonabilities"/>
                 <pokemon-moves :moves="pokemonStat.pokemon_v2_pokemonmoves"/>
             </div>
         </div>
-        <pokemon-evolutions v-if="pokemon.pokemon_v2_evolutionchain.length > 0" class="col-span-3"
+        <pokemon-evolutions v-if="pokemon.pokemon_v2_evolutionchain.length > 0" class="md:col-span-3"
             :evolutions="pokemon.pokemon_v2_evolutionchain[0].pokemon_v2_pokemonspecies"/>
     </div>
 </template>

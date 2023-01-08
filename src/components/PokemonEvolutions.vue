@@ -35,7 +35,7 @@ export default defineComponent({
         <div class="italic pl-2" v-if="evolutions.length === 1">
             This Pokémon does not evolve.
         </div>
-        <div class="flex justify-around">
+        <div class="flex flex-col md:justify-around md:flex-row">
             <div class="flex flex-col items-center" v-for="evolution in evolutions" :key="evolution.id">
                 <div class="cursor-pointer">
                     <img @click="router.push({ name: 'pokemonDetails', params: { id: evolution.id }})" :src="pokemonSprite(evolution.id)" :alt="evolution.name" />
