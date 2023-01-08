@@ -1,6 +1,6 @@
 
 <template>
-    <Header />
+    <Header @toggleMenu="toggleMenu" />
     <div class="pt-[64px] dark:bg-dark-1 overflow-auto dark:text-white" style="height: 100vh;">
         <div class="w-[80%] m-auto">
             <router-view></router-view>
@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import { createToast } from "mosha-vue-toastify";
 import { usePokedexStore } from "@/stores/pokedex";
 import localStorage from "@/composables/localStorage";
@@ -21,8 +21,12 @@ export default defineComponent({
         const pokedexStore = usePokedexStore();
         const { getFilteredPokemons } = pokedexStore;
 
+        const menuOpen = ref<boolean>(false);
+
         const storage = localStorage();
         const { filters } = storage;
+
+        const toggleMenu = (bool: boolean) => menuOpen.value = bool;
 
         onMounted(async () => {
             try {
@@ -31,6 +35,8 @@ export default defineComponent({
                 createToast('Error while fetching data', { type: "danger", position: "bottom-right" });
             }
         });
+
+        return { toggleMenu, menuOpen }
     }
 })
 </script>
