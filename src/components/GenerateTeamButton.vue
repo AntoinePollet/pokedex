@@ -1,23 +1,15 @@
-<script lang="ts">
-import { defineComponent } from "vue";
-import { useTeamStore } from "@/stores/team";
+<script setup lang="ts">
+import { useTeamStore } from '@/stores/team';
 
-export default defineComponent({
-    setup() {
-        const teamStore = useTeamStore();
-        const { generateTeam } = teamStore;
-        const generateRandomTeam = () => {
-            generateTeam();
-        }
-
-        return { generateRandomTeam }
-    }
-});
+const teamStore = useTeamStore();
+const { generateTeam } = teamStore;
+const generateRandomTeam = () => {
+  generateTeam();
+};
 </script>
 
-
 <template>
-    <div>
-        <button class="button-header" @click="generateRandomTeam">Generate</button>
-    </div>
+  <div>
+    <button class="button-header" @click="generateRandomTeam">Generate</button>
+  </div>
 </template>

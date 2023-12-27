@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 .add-to-team {
-    @apply bg-gray-400 p-1 rounded-full shadow-2xl outline-1 hover:bg-gray-500 text-white font-mono flex items-center
+  @apply bg-gray-400 p-1 rounded-full shadow-2xl outline-1 hover:bg-gray-500 text-white font-mono flex items-center;
 }
 
 .remove-from-team {
-    @apply bg-red-600 p-1 rounded-full shadow-2xl ring-1 ring-offset-1 ring-red-200 hover:bg-red-700 text-white font-mono flex items-center
+  @apply bg-red-600 p-1 rounded-full shadow-2xl ring-1 ring-offset-1 ring-red-200 hover:bg-red-700 text-white font-mono flex items-center;
 }
 
 .button-header {
-    @apply dark:bg-dark-2 dark:text-white dark:hover:bg-dark-3 font-bold bg-amber-700 py-1 px-2 rounded-2xl hover:bg-amber-800 text-white font-mono flex items-center
+  @apply dark:bg-dark-2 dark:text-white dark:hover:bg-dark-3 font-bold bg-amber-700 py-1 px-2 rounded-2xl hover:bg-amber-800 text-white font-mono flex items-center;
 }
 
 .button-header-reset {
-    @apply dark:bg-amber-100 dark:text-dark-1 dark:hover:bg-amber-50 bg-amber-50 py-1 px-2 rounded-2xl hover:bg-amber-100 text-red-500 font-mono flex items-center font-bold
+  @apply dark:bg-amber-100 dark:text-dark-1 dark:hover:bg-amber-50 bg-amber-50 py-1 px-2 rounded-2xl hover:bg-amber-100 text-red-500 font-mono flex items-center font-bold;
 }

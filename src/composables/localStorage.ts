@@ -1,27 +1,27 @@
-import { useStorage } from "@vueuse/core";
-import type { PokedexBaseResult } from "@/types";
+import { useStorage } from '@vueuse/core';
+import type { PokedexBaseResult } from '@/types';
 
 export default function localStorage() {
-    const pokemonTeam: any = useStorage('team', {});
-    const filters: any = useStorage('filters', { search: '', types: [] });
+  const pokemonTeam: any = useStorage('team', {});
+  const filters: any = useStorage('filters', { search: '', types: [] });
 
-    const addToStorage = ((pokemon: PokedexBaseResult) => {
-        pokemonTeam.value[pokemon.name] = pokemon;
-    });
+  const addToStorage = (pokemon: PokedexBaseResult) => {
+    pokemonTeam.value[pokemon.name] = pokemon;
+  };
 
-    const removeFromStorage = ((pokemonName: string) => {
-        if (pokemonTeam.value[pokemonName]) {
-            delete pokemonTeam.value[pokemonName];
-        }
-    });
-
-    const resetStorage = (): void => {
-        pokemonTeam.value = {};
+  const removeFromStorage = (pokemonName: string) => {
+    if (pokemonTeam.value[pokemonName]) {
+      delete pokemonTeam.value[pokemonName];
     }
+  };
 
-    const addFiltersToStorage = ((filter: Object) => {
-        filters.value = filter;
-    });
+  const resetStorage = (): void => {
+    pokemonTeam.value = {};
+  };
 
-    return { pokemonTeam, filters, addToStorage, removeFromStorage, resetStorage, addFiltersToStorage }
+  const addFiltersToStorage = (filter: Object) => {
+    filters.value = filter;
+  };
+
+  return { pokemonTeam, filters, addToStorage, removeFromStorage, resetStorage, addFiltersToStorage };
 }

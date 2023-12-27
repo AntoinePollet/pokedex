@@ -1,17 +1,17 @@
-import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core'
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core';
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
-    // You should use an absolute URL here
-    uri: 'https://beta.pokeapi.co/graphql/v1beta',
-})
+  // You should use an absolute URL here
+  uri: 'https://beta.pokeapi.co/graphql/v1beta',
+});
 
 // Cache implementation
-const cache = new InMemoryCache()
+const cache = new InMemoryCache();
 
 // Create the apollo client
 export const apolloClient = new ApolloClient({
-    link: httpLink,
-    cache,
-    connectToDevTools: true
+  link: httpLink,
+  cache,
+  connectToDevTools: true,
 });
