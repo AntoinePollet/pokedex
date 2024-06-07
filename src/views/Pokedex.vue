@@ -31,15 +31,15 @@ onMounted(async () => {
 
 <template>
   <div class="flex flex-1 flex-col">
-    <filters class="flex justify-center gap-x-3 pt-5 pb-10" @loading="isLoading = $event" />
+    <filters class="flex justify-center gap-x-3" @loading="isLoading = $event" />
 
-    <div v-if="isLoading" class="pt-20">
+    <div v-if="isLoading" class="pt-20 flex items-center justify-center">
       <PulseLoader :loading="isLoading" class="flex items-center justify-center" color="#fcd34d" />
     </div>
 
     <div v-else-if="pokedex.length === 0" class="text-2xl italic leading-tight text-center pt-5">No pokemons found</div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+    <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 ">
       <pokemon v-for="pokemon in pokedex" :pokemon="pokemon" :key="pokemon.id" />
     </div>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[64px] w-full bg-primary-300 dark:bg-dark-1 border-b border-solid border-dark-3">
+  <div class="h-[64px] w-full bg-primary-300 dark:bg-dark-1 border-b border-solid border-gray-300 dark:border-dark-3">
     <div class="hidden sm:flex items-center h-full italic leading-loose text-lg relative w-full">
       <div class="flex gap-x-3 absolute left-1/2 top-1/2" style="transform: translate(-50%, -50%)">
         <router-link
@@ -100,6 +100,6 @@ const toggleMenu = () => (isMenuOpen.value = !isMenuOpen.value);
 
 <style>
 .router-link-active {
-  @apply text-primary-800 dark:text-dark-contrast !important;
+  @apply text-primary-900 dark:text-dark-contrast !important;
 }
 </style>

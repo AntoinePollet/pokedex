@@ -47,7 +47,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex">
+  <div class="flex pb-5">
     <div>
       <input
         v-model="filter.search"

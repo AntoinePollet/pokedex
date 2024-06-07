@@ -1,9 +1,11 @@
 <template>
   <div class="flex flex-1 flex-col h-screen overflow-hidden">
     <Header @toggleMenu="toggleMenu(!menuOpen)"></Header>
-    <div class="dark:bg-dark-1 bg-white text-black dark:text-white flex flex-1 overflow-auto">
-      <div class="flex flex-1 lg:max-w-5xl md:max-w-3xl sm:max-w-2xl mx-auto">
-        <router-view></router-view>
+    <div class="py-10 dark:bg-dark-1 bg-white h-full overflow-auto">
+      <div class="dark:bg-dark-1 bg-white text-black dark:text-white flex flex-1">
+        <div class="flex flex-1 lg:max-w-5xl md:max-w-3xl sm:max-w-2xl mx-auto">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>
