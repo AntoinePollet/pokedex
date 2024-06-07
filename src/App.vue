@@ -1,8 +1,10 @@
 <template>
-  <Header @toggleMenu="toggleMenu()"></Header>
-  <div class="pt-[64px] dark:bg-dark-1 bg-white text-black overflow-auto dark:text-white" style="height: 100vh">
-    <div class="w-[80%] m-auto">
-      <router-view></router-view>
+  <div class="flex flex-1 flex-col h-screen overflow-hidden">
+    <Header @toggleMenu="toggleMenu(!menuOpen)"></Header>
+    <div class="dark:bg-dark-1 bg-white text-black dark:text-white flex flex-1 overflow-auto">
+      <div class="flex flex-1 lg:max-w-5xl md:max-w-3xl sm:max-w-2xl mx-auto">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>

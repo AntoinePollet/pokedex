@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineComponent, onMounted, reactive, ref, watch } from 'vue';
+import { onMounted, reactive, watch } from 'vue';
 import { colorFromType } from '@/utilities/pokemonUtilities';
 import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue';
 import localStorage from '@/composables/localStorage';
@@ -19,7 +19,7 @@ const filter = reactive({
 
 let timer: any;
 
-const filterPokemons = (event: any) => {
+const filterPokemons = () => {
   clearTimeout(timer);
   timer = setTimeout(async () => {
     emit('loading', true);
@@ -30,7 +30,7 @@ const filterPokemons = (event: any) => {
 
 watch(
   () => filter.types,
-  async (value, oldValue) => {
+  async (value) => {
     if (value) {
       addFiltersToStorage(filter);
       emit('loading', true);
