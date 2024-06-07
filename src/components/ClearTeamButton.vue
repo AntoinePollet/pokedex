@@ -10,6 +10,6 @@ const clearTeam = () => {
 
 <template>
   <div>
-    <button class="button-header-reset" @click="clearTeam">Reset</button>
+    <button class="primary" @click="clearTeam">Reset</button>
   </div>
 </template>

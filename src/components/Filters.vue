@@ -55,7 +55,7 @@ onMounted(() => {
         type="search"
         autocomplete="off"
         placeholder="Search by name ..."
-        class="border bg-gray-50 border-gray-300 text-gray-900 font-mono rounded-md p-2 text-sm placeholder-gray-400 focus:ring-amber-500 focus:border-amber-500 outline-0"
+        class="border bg-gray-50 border-gray-300 text-gray-900 font-mono rounded-md p-2 text-sm placeholder-gray-400 focus:ring-primary-500 focus:border-primary-500 outline-0"
       />
     </div>
     <Listbox v-model="filter.types" multiple>
@@ -86,14 +86,14 @@ onMounted(() => {
             >
               <li
                 :class="[
-                  active ? 'bg-amber-100 text-amber-900' : 'text-gray-900',
+                  active ? 'bg-primary-100 text-primary-900' : 'text-gray-900',
                   'relative cursor-default select-none py-2 pl-10 pr-4',
                 ]"
               >
                 <span :class="[selected ? 'font-medium' : 'font-normal', 'block truncate']">
                   {{ type }}
                 </span>
-                <span v-if="selected" class="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                <span v-if="selected" class="absolute inset-y-0 left-0 flex items-center pl-3 text-primary-600">
                   <span class="material-symbols-outlined">check</span>
                 </span>
               </li>

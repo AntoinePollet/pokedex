@@ -10,6 +10,6 @@ const generateRandomTeam = () => {
 
 <template>
   <div>
-    <button class="button-header" @click="generateRandomTeam">Generate</button>
+    <button class="primary" @click="generateRandomTeam">Generate</button>
   </div>
 </template>
