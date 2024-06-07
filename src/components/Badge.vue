@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { PropType } from 'vue';
-import { defineComponent } from 'vue';
+import { toRefs, type PropType } from 'vue';
 
 const props = defineProps({
   badgeNumber: {
@@ -9,11 +8,11 @@ const props = defineProps({
   },
 });
 
-const { badgeNumber } = props;
+const { badgeNumber } = toRefs(props);
 </script>
 
 <template>
-  <div class="bg-white text-primary-700 rounded text-sm h-[20px] w-[20px] flex justify-center items-center font-bold">
-    {{ badgeNumber }}
+  <div class="relative w-5 h-5 rounded-full bg-primary-600 text-white text-center font-semibold text-sm flex items-center justify-center">
+    <span class="absolute font-bold text-sm left-1">{{ badgeNumber }}</span>
   </div>
 </template>

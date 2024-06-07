@@ -18,7 +18,7 @@
           <badge :badge-number="teamSize" />
         </div>
       </div>
-      <div class="flex ml-auto gap-x-3 pr-3">
+      <div class="flex ml-auto gap-x-2 pr-3">
         <div class="flex items-center">
           <button v-if="isDark" class="primary flex">
             <span @click="toggleDark()" class="material-symbols-outlined cursor-pointer text-primary-200">
@@ -47,7 +47,7 @@
       <div class="sm:hidden h-screen w-screen bg-[#F2F2F2] dark:bg-dark-2 z-50 fixed p-4">
         <div class="flex flex-col items-center gap-y-3">
           <router-link
-            class="hover:text-primary-800 font-bold dark:text-white dark:hover:text-primary-300"
+            class="text-primary-800 hover:text-primary-800 font-bold dark:text-white dark:hover:text-primary-300"
             to="/"
             @click="isMenuOpen = false"
           >
@@ -62,10 +62,14 @@
           </router-link>
 
           <div class="flex items-center">
-            <span v-if="isDark" @click="toggleDark()" class="material-symbols-outlined cursor-pointer text-primary-800">
-              light_mode
-            </span>
-            <span v-else @click="toggleDark()" class="material-symbols-outlined cursor-pointer">dark_mode</span>
+            <button v-if="isDark" class="primary flex">
+              <span @click="toggleDark()" class="material-symbols-outlined cursor-pointer text-primary-200">
+                light_mode
+              </span>
+            </button>
+            <button v-else class="primary flex">
+              <span @click="toggleDark()" class="material-symbols-outlined cursor-pointer text-primary-800">dark_mode</span>
+            </button>
           </div>
           <clear-team-button />
           <generate-team-button />
@@ -96,6 +100,6 @@ const toggleMenu = () => (isMenuOpen.value = !isMenuOpen.value);
 
 <style>
 .router-link-active {
-  @apply text-primary-800 dark:text-dark-contrast;
+  @apply text-primary-800 dark:text-dark-contrast !important;
 }
 </style>
