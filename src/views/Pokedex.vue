@@ -7,7 +7,6 @@ import Filters from '@/components/Filters.vue';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import localStorage from '@/composables/localStorage';
 import { createToast } from 'mosha-vue-toastify';
-
 const pokedexStore = usePokedexStore();
 const { getFilteredPokemons } = pokedexStore;
 const { pokedex } = storeToRefs(pokedexStore);

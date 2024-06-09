@@ -4,7 +4,6 @@ import { colorFromType } from '@/utilities/pokemonUtilities';
 import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue';
 import localStorage from '@/composables/localStorage';
 import { usePokedexStore } from '@/stores/pokedex';
-
 const emit = defineEmits(['loading']);
 const pokedexStore = usePokedexStore();
 const { getFilteredPokemons } = pokedexStore;
@@ -87,9 +86,10 @@ onMounted(() => {
               <li
                 :class="[
                   active ? 'bg-primary-100 text-primary-900' : 'text-gray-900',
-                  'relative cursor-default select-none py-2 pl-10 pr-4',
+                  'relative cursor-default select-none py-2 pl-10 pr-4 flex items-center gap-2',
                 ]"
               >
+                <img :src="`/icons/${type}.svg`" class="w-4 h-4" />
                 <span :class="[selected ? 'font-medium' : 'font-normal', 'block truncate']">
                   {{ type }}
                 </span>
