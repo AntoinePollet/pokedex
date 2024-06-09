@@ -46,11 +46,11 @@ watch(pokemonId, async () => {
 </script>
 
 <template>
-  <div v-if="isLoading" class="pt-20">
-    <PulseLoader :loading="isLoading" class="flex items-center justify-center" color="#fcd34d" />
+  <div v-if="isLoading" class="pt-20 flex flex-1 justify-center">
+    <PulseLoader :loading="isLoading" class="" color="#fcd34d" />
   </div>
 
-  <div v-else>
+  <div v-else class="flex items-center">
     <pokemon-details :pokemon="pokemon" />
   </div>
 </template>

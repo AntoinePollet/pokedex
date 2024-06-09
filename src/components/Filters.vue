@@ -75,7 +75,7 @@ onMounted(() => {
           leave-to-class="opacity-0"
         >
           <ListboxOptions
-            class="absolute z-50 mt-1 max-h-60 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+            class="absolute z-50 w-40 mt-1 max-h-60 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
           >
             <ListboxOption
               v-slot="{ active, selected }"
@@ -85,7 +85,7 @@ onMounted(() => {
             >
               <li
                 :class="[
-                  active ? 'bg-primary-100 text-primary-900' : 'text-gray-900',
+                  (active || selected) ? 'bg-primary-50 text-primary-900' : 'text-gray-900',
                   'relative cursor-default select-none py-2 pl-10 pr-4 flex items-center gap-2',
                 ]"
               >
